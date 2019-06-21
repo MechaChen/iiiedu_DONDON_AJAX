@@ -14,8 +14,9 @@
     </center>
     <script>
       function getMember() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = () => {
           if (xhr.readyState == 4) {
             if (xhr.status == 200) {
               document.getElementById("showPanel").innerHTML = xhr.responseText;
@@ -25,8 +26,11 @@
           }
         };
 
-        var url = "getMore.php?memId=" + document.getElementById("memId").value;
+        const url = `getMore.php?memId=${
+          document.getElementById("memId").value
+        }`;
         xhr.open("get", url, true);
+
         xhr.send(null);
       }
     </script>

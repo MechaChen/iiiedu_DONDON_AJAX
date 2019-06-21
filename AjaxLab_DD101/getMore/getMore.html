@@ -14,7 +14,10 @@
     </center>
     <script>
       function getMember() {
-        var xhr = new XMLHttpRequest();
+        // 1st 啟動 XHR
+        const xhr = new XMLHttpRequest();
+
+        // 2nd 設定狀態變更時所要執行的動作
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4) {
             if (xhr.status == 200) {
@@ -25,8 +28,13 @@
           }
         };
 
-        var url = "getMore.php?memId=" + document.getElementById("memId").value;
+        // 3rd 設定傳送的目的地
+        const url = `getMore.php?memId=${
+          document.getElementById("memId").value
+        }`;
         xhr.open("get", url, true);
+
+        // 4th 資料傳送
         xhr.send(null);
       }
     </script>

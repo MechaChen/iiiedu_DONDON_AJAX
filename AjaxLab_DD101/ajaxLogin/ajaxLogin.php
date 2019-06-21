@@ -1,6 +1,6 @@
 <?php
 try{
-  require_once("connectBooks.php");
+  require_once("../connectBooks.php");
 
 
   if( $member->rowCount()==0){ //查無此人

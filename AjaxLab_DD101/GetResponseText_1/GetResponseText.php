@@ -1,0 +1,21 @@
+<?php
+try{
+  require_once("../connectBooks.php");
+  $sql = 
+  "SELECT *
+  FROM member
+  WHERE memId = :memId
+  ";
+  $member = $pdo->prepare($sql);
+  $member->bindValue(':memId', $_REQUEST["memId"]);
+  $member->execute();
+
+  if( $member->rowCount() !=0){
+    echo "此帳號可以使用";
+  }else{
+    echo "帳號已存在，不可使用";
+  } 
+}catch(PDOException $e){
+  echo "error";
+}
+?>

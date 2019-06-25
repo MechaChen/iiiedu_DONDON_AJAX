@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>無標題文件</title>
+  </head>
+
+  <body>
+    <div>首頁>>會員專區</div>
+    <center>
+      會員帳號<input type="text" name="memId" id="memId" />
+      <input type="button" value="取得會員資料" onclick="getMember()" />
+      <div id="showPanel"></div>
+    </center>
+    <script>
+      function showMember(jsonData) {
+        const memRow = JSON.parse(jsonData);
+        if (memRow.memId) {
+          const html = `<table>
+              <tr><th>姓名</th><td>${memRow.memName}</td></tr>
+              <tr><th>帳號</th><td>${memRow.memId}</td></tr>
+              <tr><th>生日</th><td>${memRow.birthday}</td></tr>
+              <tr><th>email</th><td>${memRow.email}</td></tr>
+            </table>
+            `;
+          document.getElementById("showPanel").innerHTML = html;
+        } else {
+          document.getElementById(
+            "showPanel"
+          ).innerHTML = `<center>查無此會員</center>`;
+        }
+      }
+
+      function getMember() {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          if (xhr.status == 200) {
+            //modify here
+            showMember(xhr.responseText);
+          } else {
+            alert(xhr.status);
+          }
+        };
+
+        var url =
+          "getMore_JSON.php?memId=" + document.getElementById("memId").value;
+        xhr.open("Get", url, true);
+        xhr.send(null);
+      }
+    </script>
+  </body>
+</html>
